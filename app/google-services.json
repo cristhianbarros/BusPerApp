@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "924169898150",
+    "firebase_url": "https://luminous-fire-2940.firebaseio.com",
+    "project_id": "luminous-fire-2940",
+    "storage_bucket": "luminous-fire-2940.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924169898150:android:8948dd434abe2ec2",
+        "android_client_info": {
+          "package_name": "com.busperapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924169898150-ihfs618b7bf5tmrpcdp830ej81qokobi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcD9mN38xuy_x1yEbH5Fdfrnbw9iqaiMk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

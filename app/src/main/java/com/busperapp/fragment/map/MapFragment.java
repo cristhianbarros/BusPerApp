@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.object.ui.AddObject;
+import com.busperapp.object.ui.DetailObjectActivity;
+import com.busperapp.util.CustomInfoWindow;
 import com.busperapp.util.FirebaseHelper;
 import com.busperapp.util.GoogleApiClientHelper;
 import com.busperapp.util.Util;
@@ -29,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.Map;
+import java.util.StringTokenizer;
 
 
 /**
@@ -101,14 +104,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         });
 
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
+        mMap.setInfoWindowAdapter(new CustomInfoWindow(getActivity()));
 
-                return false;
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                StringTokenizer tokens = new StringTokenizer(marker.getSnippet(), "|");
+
+                String email = tokens.nextToken();
+                String key = tokens.nextToken();
+
+                Intent i = new Intent(getContext(), DetailObjectActivity.class);
+                i.putExtra("key", key);
+
+                startActivity(i);
+
+
             }
         });
-//
+
 //
 //        Query queryRef = mRef.child("object_lost").orderByChild("ubicationLatLang/latitud").startAt(6.233).endAt(6.235);
         Query queryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByKey();
@@ -120,11 +135,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 ObjectLost objectLost = dataSnapshot.getValue(ObjectLost.class);
                 Map<String, Double> ubicationObject = objectLost.getUbicationLatLang();
 
+                String snippet = objectLost.getUser()+"|"+objectLost.getKey();
+
                 MarkerOptions mMarkerOption = new MarkerOptions()
                         .position(new LatLng(ubicationObject.get("latitude"), ubicationObject.get("longitude")))
-                        .title(objectLost.getTitle());
+                        .title(objectLost.getTitle())
+                        .snippet(snippet)
+                        ;
+
 
                 Marker mMarker = mMap.addMarker(mMarkerOption);
+
 
             }
 

@@ -13,13 +13,13 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
+import com.busperapp.model.Category;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,7 +46,7 @@ public class DialogObjectLostFragment extends DialogFragment {
     private ObjectLost mObjectLost;
     private Map<String, Double> mUbicationLatLng;
     private Spinner spinnerCategory;
-    private ArrayList<Category> mArrayCategories;
+//    private ArrayList<Category> mArrayCategories;
 
     @NonNull
     @Override
@@ -130,15 +129,15 @@ public class DialogObjectLostFragment extends DialogFragment {
             }
 
             DatabaseReference mCategoryRef = mDatabase.getReference(Category.FIREBASE_TAG);
-            mArrayCategories = new ArrayList<>();
+//            mArrayCategories = new ArrayList<>();
 
             Query mRef = mCategoryRef.orderByChild("active").equalTo(true);
 
             mRef.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Category c = dataSnapshot.getValue(Category.class);
-                    mArrayCategories.add(c);
+//                    Category c = dataSnapshot.getValue(Category.class);
+//                    mArrayCategories.add(c);
                 }
 
                 @Override
@@ -171,9 +170,9 @@ public class DialogObjectLostFragment extends DialogFragment {
             super.onPostExecute(aVoid);
 
             edtAddress.setText(address);
-            ArrayAdapter<Category> mAdapter = new ArrayAdapter<Category>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, mArrayCategories);
-            spinnerCategory.setAdapter(mAdapter);
-            spinnerCategory.setSelection(0);
+//            ArrayAdapter<Category> mAdapter = new ArrayAdapter<Category>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, mArrayCategories);
+//            spinnerCategory.setAdapter(mAdapter);
+//            spinnerCategory.setSelection(0);
 
         }
     }

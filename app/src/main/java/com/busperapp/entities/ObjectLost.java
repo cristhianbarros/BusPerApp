@@ -1,29 +1,38 @@
-package com.busperapp.model;
+package com.busperapp.entities;
 
 import java.util.Map;
 
 public class ObjectLost {
 
+    private String key;
     private String title;
     private String description;
     private String address;
     private String category;
     private String postalCode;
     private Map<String, Double> ubicationLatLang;
-
-    public static final String FIREBASE_TAG = "object_lost";
+    private String user;
 
     public ObjectLost() {
 
     }
 
-    public ObjectLost(String title, String description, String address, String category, String postalCode, Map<String, Double> ubicationLatLang) {
+    public ObjectLost(String title, String description, String address, String category, String postalCode, Map<String, Double> ubicationLatLang, String user) {
         this.title = title;
         this.description = description;
         this.address = address;
         this.category = category;
         this.postalCode = postalCode;
         this.ubicationLatLang = ubicationLatLang;
+        this.user = user;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getTitle() {
@@ -74,4 +83,24 @@ public class ObjectLost {
         this.ubicationLatLang = ubicationLatLang;
     }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "ObjectLost{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", category='" + category + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", ubicationLatLang=" + ubicationLatLang +
+                ", user='" + user + '\'' +
+                '}';
+    }
 }

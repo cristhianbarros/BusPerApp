@@ -1,4 +1,4 @@
-package com.busperapp.model;
+package com.busperapp.entities;
 
 
 import java.util.UUID;

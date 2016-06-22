@@ -1,4 +1,4 @@
-package com.busperapp.login;
+package com.busperapp.login.ui;
 
 import android.view.View;
 
@@ -18,6 +18,7 @@ public interface LoginView {
 
     void newUserSuccess();
     void newUSerError(String error);
+
 
 
 }

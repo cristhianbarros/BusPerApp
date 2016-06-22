@@ -1,10 +1,14 @@
 package com.busperapp.login;
 
-/**
- * Created by cristhian.barros on 15/06/2016.
- */
-public class LoginPresenterImpl implements LoginPresenter {
+import com.busperapp.login.events.LoginEvent;
+import com.busperapp.login.ui.LoginView;
+import com.busperapp.util.EventBus;
+import com.busperapp.util.GreenRobotEventBus;
 
+import org.greenrobot.eventbus.Subscribe;
+
+public class LoginPresenterImpl implements LoginPresenter {
+    private EventBus eventBus;
     private LoginView loginView;
     private LoginInteractor loginInteractor;
 
@@ -12,11 +16,19 @@ public class LoginPresenterImpl implements LoginPresenter {
     public LoginPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
         this.loginInteractor = new LoginInteractorImpl();
+        this.eventBus = GreenRobotEventBus.getInstance();
+    }
+
+
+    @Override
+    public void onCreate() {
+        eventBus.register(this);
     }
 
     @Override
     public void onDestroy() {
         loginView = null;
+        eventBus.unregister(this);
     }
 
     @Override
@@ -50,6 +62,37 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     }
 
+    @Override
+    @Subscribe
+    public void onEventMainThread(LoginEvent event) {
+
+        switch(event.getEventType()) {
+            case LoginEvent.onSignInSuccess:
+                onSignInSuccess();
+                break;
+            case LoginEvent.onSignInError:
+                onSignInError(event.getErrorMessage());
+                break;
+            case LoginEvent.onSignUpSuccess:
+                onSignUpSuccess();
+                break;
+            case LoginEvent.onSignUpError:
+                onSignUpError(event.getErrorMessage());
+                break;
+            case LoginEvent.onFailedRecoverSession:
+                onFailedToRecoverSession();
+                break;
+
+        }
+    }
+
+    public void onFailedToRecoverSession() {
+        if(loginView != null) {
+            loginView.hideProgressBar();
+            loginView.enableInputs();
+        }
+    }
+
     private void onSignInSuccess() {
         if(loginView != null) {
             loginView.navigateToMainScreen();
@@ -60,7 +103,6 @@ public class LoginPresenterImpl implements LoginPresenter {
         if(loginView != null) {
             loginView.newUserSuccess();
         }
-
     }
 
     private void onSignInError(String error) {

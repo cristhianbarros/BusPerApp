@@ -3,6 +3,7 @@ package com.busperapp.util;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +16,11 @@ public class FirebaseHelper {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     private FirebaseAuth mAuthData;
+    private FirebaseStorage mStorage;
+
     private final static String USER_PATH = "users";
-    private final static String OBJECT_LOST_PATH = "objectlost";
-    private final static String CATEGORIES_PATH = "categories";
+    public final static String OBJECT_LOST_PATH = "objectlost";
+    public final static String CATEGORIES_PATH = "categories";
     private final static String FIREBASE_URL = "https://luminous-fire-2940.firebaseio.com/";
 
     private static class SingletonHolder {
@@ -31,6 +34,23 @@ public class FirebaseHelper {
     public FirebaseHelper() {
         this.mDatabase = FirebaseDatabase.getInstance();
         this.mRef = this.mDatabase.getReference();
+        this.mAuthData = FirebaseAuth.getInstance();
+        this.mStorage = FirebaseStorage.getInstance();
+    }
+
+    public FirebaseHelper(String reference) {
+        this.mDatabase = FirebaseDatabase.getInstance();
+        this.mRef = this.mDatabase.getReference(reference);
+        this.mAuthData = FirebaseAuth.getInstance();
+        this.mStorage = FirebaseStorage.getInstance();
+    }
+
+    public FirebaseAuth getmAuthData() {
+        return mAuthData;
+    }
+
+    public FirebaseStorage getmStorage() {
+        return mStorage;
     }
 
     public DatabaseReference getmRef() {
@@ -38,7 +58,6 @@ public class FirebaseHelper {
     }
 
     public String getAuthUserEmail() {
-        mAuthData = FirebaseAuth.getInstance();
         String email = null;
         if(mAuthData != null) {
             if(mAuthData.getCurrentUser() != null) {
@@ -64,8 +83,8 @@ public class FirebaseHelper {
         return getUserReference(getAuthUserEmail());
     }
 
-
     public void changeUserConnectionStatus(boolean online) {
+
         if(getMyUserReference() != null) {
             Map<String, Object> updates = new HashMap<>();
             updates.put("online", online);
@@ -83,6 +102,5 @@ public class FirebaseHelper {
     public void signOff() {
         mAuthData.signOut();
     }
-
 
 }

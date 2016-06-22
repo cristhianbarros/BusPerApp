@@ -9,20 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.busperapp.AddObject;
 import com.busperapp.R;
+import com.busperapp.entities.ObjectLost;
+import com.busperapp.object.ui.AddObject;
+import com.busperapp.util.FirebaseHelper;
 import com.busperapp.util.GoogleApiClientHelper;
 import com.busperapp.util.Util;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.Map;
 
 
 /**
@@ -73,6 +79,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return v;
     }
 
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -81,42 +89,42 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onMapClick(LatLng latLng) {
 
-//                mLatitude = latLng.latitude;
-//                mLongitude = latLng.longitude;
-//
-//                Bundle mBundle = new Bundle();
-//                mBundle.putDouble("latitude", mLatitude);
-//                mBundle.putDouble("longitude", mLongitude);
+                mLatitude = latLng.latitude;
+                mLongitude = latLng.longitude;
 
-//                DialogObjectLostFragment objectLostFragment = new DialogObjectLostFragment();
-//                objectLostFragment.setArguments(mBundle);
-//                objectLostFragment.show(getChildFragmentManager(), "");
-
-                startActivity(new Intent(getContext(), AddObject.class));
+                Intent mIntent = new Intent(getContext(), AddObject.class);
+                mIntent.putExtra("latitude", mLatitude);
+                mIntent.putExtra("longitude", mLongitude);
+                startActivity(mIntent);
 
             }
         });
 
 
-        //Query queryRef = mRef.child("object_lost").orderByChild("ubicationLatLang/latitud").startAt(6.233).endAt(6.235);
-        Query queryRef = mRef.child("object_lost").orderByKey();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                return false;
+            }
+        });
+//
+//
+//        Query queryRef = mRef.child("object_lost").orderByChild("ubicationLatLang/latitud").startAt(6.233).endAt(6.235);
+        Query queryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByKey();
 
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-//                ObjectLost objectLost = dataSnapshot.getValue(ObjectLost.class);
-//
-//                Map<String, Double> ubicationObject = objectLost.getUbicationLatLang();
-//
-//                Double lat = ubicationObject.get("latitude");
-//                Double lon = ubicationObject.get("longitud");
-//
-//                mMap.addMarker( new MarkerOptions()
-//                .position(new LatLng(lat, lon))
-//                .title(objectLost.getTitle()));
-//
-//                Log.e("Object objectLost: ", objectLost.toString());
+                ObjectLost objectLost = dataSnapshot.getValue(ObjectLost.class);
+                Map<String, Double> ubicationObject = objectLost.getUbicationLatLang();
+
+                MarkerOptions mMarkerOption = new MarkerOptions()
+                        .position(new LatLng(ubicationObject.get("latitude"), ubicationObject.get("longitude")))
+                        .title(objectLost.getTitle());
+
+                Marker mMarker = mMap.addMarker(mMarkerOption);
 
             }
 
@@ -140,16 +148,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             }
 
-
         });
 
     }
 
-
-    public void showAllObjectLost() {
-
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

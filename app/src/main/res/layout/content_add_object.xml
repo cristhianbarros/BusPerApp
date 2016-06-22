@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.busperapp.AddObject"
+    tools:context=".object.ui.AddObject"
     tools:showIn="@layout/activity_add_object">
 
     <TextView
-        android:layout_width="match_parent"
+                android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/edtTitle" />
 
     <EditText
-        android:id="@+id/edtTitle"
+        android:id="@+id/editTxtTitle"
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
         android:text="@string/edtDescription" />
 
     <EditText
-        android:id="@+id/edtDescription"
+        android:id="@+id/editTextDescription"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="90dp" />
@@ -37,7 +37,7 @@
         android:text="@string/edtAddress" />
 
     <EditText
-        android:id="@+id/edtAddress"
+        android:id="@+id/editTxtAddress"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -58,16 +58,11 @@
         android:layout_height="wrap_content"
         android:text="Fotos" />
 
-    <ImageButton
-        android:id="@+id/btnImage"
-        android:background="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon"/>
-
     <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:id="@+id/imgViewPhoto"
+        android:src="@mipmap/icon"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

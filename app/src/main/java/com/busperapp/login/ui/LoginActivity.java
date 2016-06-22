@@ -1,4 +1,4 @@
-package com.busperapp.login;
+package com.busperapp.login.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.busperapp.MainActivity;
 import com.busperapp.R;
+import com.busperapp.login.LoginPresenter;
+import com.busperapp.login.LoginPresenterImpl;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -39,8 +41,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         container = (RelativeLayout) findViewById(R.id.layoutMainContainer);
 
         loginPresenter = new LoginPresenterImpl(this);
+        loginPresenter.onCreate();
         loginPresenter.checkForAuthentication();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        loginPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -55,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showProgressBar() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override

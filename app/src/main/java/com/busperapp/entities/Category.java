@@ -1,4 +1,4 @@
-package com.busperapp.model;
+package com.busperapp.entities;
 
 /**
  * Created by cristhian.barros on 06/06/2016.

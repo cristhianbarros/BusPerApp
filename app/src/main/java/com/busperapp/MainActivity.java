@@ -1,5 +1,6 @@
 package com.busperapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import android.view.MenuItem;
 
 import com.busperapp.fragment.historial.HistorialFragment;
 import com.busperapp.fragment.map.MapFragment;
+import com.busperapp.login.LoginInteractor;
+import com.busperapp.login.LoginInteractorImpl;
+import com.busperapp.login.ui.LoginActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     private GoogleApiClient.Builder mGoogleApiClient;
     private FragmentManager mFramgmentManager;
     private Fragment mFragment;
+    private LoginInteractor loginInteractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +35,18 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//
-//        if(savedInstanceState == null) {
-//
-//            mFragment = new MapFragment();
-//            mFramgmentManager = getSupportFragmentManager();
-//
-//                    mFramgmentManager.beginTransaction()
-//                    .add(R.id.main_content, mFragment)
-//                    .addToBackStack("Map Fragment 1")
-//                    .commit();
-//        }
+        loginInteractor = new LoginInteractorImpl();
+
+        if(savedInstanceState == null) {
+
+            mFragment = new MapFragment();
+            mFramgmentManager = getSupportFragmentManager();
+
+                    mFramgmentManager.beginTransaction()
+                    .add(R.id.main_content, mFragment)
+                    .addToBackStack("Map Fragment 1")
+                    .commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,8 +112,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_sign_out) {
+            loginInteractor.doSignOut();
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -11,7 +11,6 @@ public class LoginInteractorImpl  implements  LoginInteractor{
         loginRepository = new LoginRepositoryImpl();
     }
 
-
     @Override
     public void checkSession() {
         loginRepository.checkSession();
@@ -25,5 +24,10 @@ public class LoginInteractorImpl  implements  LoginInteractor{
     @Override
     public void doSignIn(String email, String password) {
         loginRepository.signIn(email, password);
+    }
+
+    @Override
+    public void doSignOut() {
+        loginRepository.signOut();
     }
 }

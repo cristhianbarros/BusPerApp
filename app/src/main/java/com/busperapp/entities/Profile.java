@@ -1,7 +1,6 @@
-package com.busperapp.model;
+package com.busperapp.entities;
 
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by cristhian.barros on 04/05/2016.

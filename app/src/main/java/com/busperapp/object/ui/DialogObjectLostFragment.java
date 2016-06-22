@@ -1,4 +1,4 @@
-package com.busperapp.fragment.object;
+package com.busperapp.object.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,8 +19,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.busperapp.R;
-import com.busperapp.model.Category;
-import com.busperapp.model.ObjectLost;
+import com.busperapp.entities.Category;
+import com.busperapp.entities.ObjectLost;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +30,6 @@ import com.google.firebase.database.Query;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -89,16 +88,14 @@ public class DialogObjectLostFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        DatabaseReference mObjectLostAdd = mDatabase.getReference(ObjectLost.FIREBASE_TAG);
-
-                        mUbicationLatLng = new HashMap<>();
-                        mUbicationLatLng.put("latitude", mLatitude);
-                        mUbicationLatLng.put("longitude", mLongitude);
-
-                        Category mCategory = (Category) spinnerCategory.getSelectedItem();
-
-                        mObjectLost = new ObjectLost(edtTitle.getText().toString(), edtDescription.getText().toString(), edtAddress.getText().toString(), mCategory.getName(),postalCode, mUbicationLatLng);
-                        mObjectLostAdd.push().setValue(mObjectLost);
+//                        mUbicationLatLng = new HashMap<>();
+//                        mUbicationLatLng.put("latitude", mLatitude);
+//                        mUbicationLatLng.put("longitude", mLongitude);
+//
+//                        Category mCategory = (Category) spinnerCategory.getSelectedItem();
+//
+//                        mObjectLost = new ObjectLost(edtTitle.getText().toString(), edtDescription.getText().toString(), edtAddress.getText().toString(), mCategory.getName(),postalCode, mUbicationLatLng);
+//                        mObjectLostAdd.push().setValue(mObjectLost);
                         dialog.cancel();
                     }
                 })

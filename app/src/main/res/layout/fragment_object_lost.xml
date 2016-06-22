@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.busperapp.fragment.object.DialogObjectLostFragment">
+    tools:context=".object.ui.DialogObjectLostFragment">
 
     <TextView
         android:layout_width="match_parent"

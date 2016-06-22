@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.busperapp.R;
-import com.busperapp.entities.Category;
 import com.busperapp.entities.ObjectLost;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

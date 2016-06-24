@@ -182,7 +182,6 @@ public class AddObject extends AppCompatActivity {
 
         if(mSetImage != null) {
             StorageReference objectLostPhoto = storageReference.child("images/"+objectLost.getKey());
-
             mSetImage.setDrawingCacheEnabled(true);
             mSetImage.buildDrawingCache();
             Bitmap bitmap = mSetImage.getDrawingCache();

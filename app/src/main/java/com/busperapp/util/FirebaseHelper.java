@@ -8,9 +8,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by cristhian.barros on 14/06/2016.
- */
 public class FirebaseHelper {
 
     private FirebaseDatabase mDatabase;

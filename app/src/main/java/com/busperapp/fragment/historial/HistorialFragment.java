@@ -52,7 +52,8 @@ public class HistorialFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         listObjects = new ArrayList<ObjectLost>();
-        Query QueryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("user");//.equalTo("cristhianbarros91@hotmail.com");
+        Query QueryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("user").equalTo(FirebaseHelper.getInstance().getAuthUserEmail());
+        //.equalTo("cristhianbarros91@hotmail.com")
 
         QueryRef.addChildEventListener(new ChildEventListener() {
             @Override

@@ -35,7 +35,7 @@ public class HistorialFragment extends Fragment {
     DatabaseReference mRef = database.getReference();
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private ArrayList<ObjectLost> listObjects;
+    public static ArrayList<ObjectLost> listObjects;
     private HistoricalAdapter historicalViewAdapter;
     private Map<String, Double> mUbicationLatLng;
 
@@ -52,16 +52,17 @@ public class HistorialFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         listObjects = new ArrayList<ObjectLost>();
-        Query QueryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("user").equalTo("cristhianbarros91@hotmail.com");
+        Query QueryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("user");//.equalTo("cristhianbarros91@hotmail.com");
 
         QueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ObjectLost mObj = dataSnapshot.getValue(ObjectLost.class);
-                Toast.makeText(getContext(),""+ mObj.getCategory(), Toast.LENGTH_LONG).show();
-                listObjects.add(mObj);
-                //listObjects.add(new ObjectLost(mObj.getTitle(),mObj.getDescription(),mObj.getAddress(),mObj.getCategory(),mObj.getPostalCode(),mObj.getUbicationLatLang(),mObj.getUser()));
+                HistorialFragment.listObjects.add(mObj);
+                historicalViewAdapter = new HistoricalAdapter(HistorialFragment.listObjects);
+                recyclerView.setAdapter(historicalViewAdapter);
 
+                //listObjects.add(new ObjectLost(mObj.getTitle(),mObj.getDescription(),mObj.getAddress(),mObj.getCategory(),mObj.getPostalCode(),mObj.getUbicationLatLang(),mObj.getUser()))
             }
 
             @Override
@@ -85,15 +86,12 @@ public class HistorialFragment extends Fragment {
             }
         });
 
-
-
-        mUbicationLatLng = new HashMap<>();
+        /*mUbicationLatLng = new HashMap<>();
         mUbicationLatLng.put("latitude", 6.212419);
         mUbicationLatLng.put("longitude", -75.573792);
-        listObjects.add(new ObjectLost("prueba", "primer vista", "Diagonal 62", "hola", "12345", mUbicationLatLng, "agrajava"));
-        listObjects.add(new ObjectLost("prueba2", "segunda vista", "Diagonal 62", "hola", "12345", mUbicationLatLng, "agrajava"));
-        historicalViewAdapter = new HistoricalAdapter(listObjects);
-        recyclerView.setAdapter(historicalViewAdapter);
+        HistorialFragment.listObjects.add(new ObjectLost("prueba", "primer vista", "Diagonal 62", "hola", "12345", mUbicationLatLng, "agrajava"));
+        HistorialFragment.listObjects.add(new ObjectLost("prueba2", "segunda vista", "Diagonal 62", "hola", "12345", mUbicationLatLng, "agrajava"));
+        */
 
         return v;
 

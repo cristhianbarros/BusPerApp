@@ -13,4 +13,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/descripcion"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:id="@+id/imagen"/>
+
 </LinearLayout>

@@ -75,7 +75,6 @@ public class HistoricalAdapter extends RecyclerView.Adapter<HistoricalAdapter.Vi
                 context.startActivity(I);
             }
         });
-       // holder.descripcion.setText(ObjHistorical.getDescription());
     }
 
     @Override

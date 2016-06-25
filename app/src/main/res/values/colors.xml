@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textinfo">#000</color>
+    <color name="descriptionblack">#000</color>
+    <color name="titleblack">#000</color>
+    <color name="vieworange">#F96331</color>
+    <color name="descriptionorange">#F96331</color>
 </resources>

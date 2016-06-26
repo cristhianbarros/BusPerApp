@@ -4,47 +4,25 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Config;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.busperapp.R;
-import com.busperapp.model.Category;
-import com.busperapp.model.ObjectLost;
-import com.busperapp.model.PostalCode;
+import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.Util;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -64,7 +42,6 @@ public class DialogObjectLostFragment extends DialogFragment {
     private ObjectLost mObjectLost;
     private Map<String, Double> mUbicationLatLng;
     private Spinner spinnerCategory;
-    private ArrayList<Category> mArrayCategories;
 
     public static final int RESULT_GALLERY = 0;
 
@@ -106,16 +83,16 @@ public class DialogObjectLostFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        DatabaseReference mObjectLostAdd = mDatabase.getReference(ObjectLost.FIREBASE_TAG);
+//                        DatabaseReference mObjectLostAdd = mDatabase.getReference(ObjectLost.FIREBASE_TAG);
 
                         mUbicationLatLng = new HashMap<>();
                         mUbicationLatLng.put("latitude", mLatitude);
                         mUbicationLatLng.put("longitude", mLongitude);
 
-                        Category mCategory = (Category) spinnerCategory.getSelectedItem();
+//                        Category mCategory = (Category) spinnerCategory.getSelectedItem();
 
-                        mObjectLost = new ObjectLost(edtTitle.getText().toString(), edtDescription.getText().toString(), edtAddress.getText().toString(), mCategory.getName(),postalCode, mUbicationLatLng);
-                        mObjectLostAdd.push().setValue(mObjectLost);
+//                        mObjectLost = new ObjectLost(edtTitle.getText().toString(), edtDescription.getText().toString(), edtAddress.getText().toString(), mCategory.getName(),postalCode, mUbicationLatLng);
+//                        mObjectLostAdd.push().setValue(mObjectLost);
                         dialog.cancel();
                     }
                 })
@@ -149,38 +126,38 @@ public class DialogObjectLostFragment extends DialogFragment {
                 e.printStackTrace();
             }
 
-            DatabaseReference mCategoryRef = mDatabase.getReference(Category.FIREBASE_TAG);
-            mArrayCategories = new ArrayList<>();
+//            DatabaseReference mCategoryRef = mDatabase.getReference(Category.FIREBASE_TAG);
+//            mArrayCategories = new ArrayList<>();
 
-            Query mRef = mCategoryRef.orderByChild("active").equalTo(true);
-
-            mRef.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Category c = dataSnapshot.getValue(Category.class);
-                    mArrayCategories.add(c);
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            Query mRef = mCategoryRef.orderByChild("active").equalTo(true);
+//
+//            mRef.addChildEventListener(new ChildEventListener() {
+//                @Override
+//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                    Category c = dataSnapshot.getValue(Category.class);
+//                    mArrayCategories.add(c);
+//                }
+//
+//                @Override
+//                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                }
+//
+//                @Override
+//                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
 
 
             return null;
@@ -191,9 +168,9 @@ public class DialogObjectLostFragment extends DialogFragment {
             super.onPostExecute(aVoid);
 
             edtAddress.setText(address);
-            ArrayAdapter<Category> mAdapter = new ArrayAdapter<Category>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, mArrayCategories);
-            spinnerCategory.setAdapter(mAdapter);
-            spinnerCategory.setSelection(0);
+//            ArrayAdapter<Category> mAdapter = new ArrayAdapter<Category>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, mArrayCategories);
+//            spinnerCategory.setAdapter(mAdapter);
+//            spinnerCategory.setSelection(0);
 
         }
     }

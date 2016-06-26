@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,6 +27,12 @@ public class GoogleApiClientHelper implements GoogleApiClient.ConnectionCallback
     private final int  REQUEST_RESOLVE_GOOGLE_CLIENT_ERROR = 1;
     private boolean mResolvingError;
     private GoogleMap mMap;
+    private LocationRequest mLocationRequest;
+
+    // Location updates intervals in sec
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
 
 
 
@@ -44,7 +52,6 @@ public class GoogleApiClientHelper implements GoogleApiClient.ConnectionCallback
                 .build();
 
         mGoogleApiClient.connect();
-
     }
 
     public void getLocation() {
@@ -61,11 +68,11 @@ public class GoogleApiClientHelper implements GoogleApiClient.ConnectionCallback
 
                 LatLng mLatLng = new LatLng(mLatitude, mLongitude);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                CameraUpdate mUpdateLocation = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
+                mMap.animateCamera(mUpdateLocation);
 
             } else {
-                Util.showMessage(mContext,"mLastLocation is null");
+                Util.showMessage(mContext,"Ops, no ha sido posible encontrar tú Ubicación");
             }
 
         } catch(SecurityException e) {
@@ -77,16 +84,22 @@ public class GoogleApiClientHelper implements GoogleApiClient.ConnectionCallback
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         getLocation();
-        Log.d(TAG, " onConnected() called");
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
         Log.i(TAG, " onConnectionSuspended() called");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.i(TAG, " onConnectionFailed() called, message: "+connectionResult.toString());
+        mGoogleApiClient.disconnect();
     }
+
+    public void disconnect() {
+        mGoogleApiClient.disconnect();
+    }
+
 }

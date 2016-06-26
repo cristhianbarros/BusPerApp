@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,8 +58,6 @@ public class DetailObjectActivity extends AppCompatActivity {
 
                     if (mObjectLost != null) {
 
-                        Log.e("mObjectLost", key);
-                        Log.e("mObjectLost", mObjectLost.toString());
                         txtEmail.setText(mObjectLost.getUser());
                         txtDescription.setText(mObjectLost.getDescription());
                         txtTitle.setText(mObjectLost.getTitle());

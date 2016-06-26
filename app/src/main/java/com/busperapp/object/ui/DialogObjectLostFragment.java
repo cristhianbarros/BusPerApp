@@ -19,18 +19,14 @@ import android.widget.Spinner;
 
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
-import com.busperapp.model.Category;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+//import com.busperapp.model.Category;
 
 public class DialogObjectLostFragment extends DialogFragment {
 
@@ -128,38 +124,38 @@ public class DialogObjectLostFragment extends DialogFragment {
                 e.printStackTrace();
             }
 
-            DatabaseReference mCategoryRef = mDatabase.getReference(Category.FIREBASE_TAG);
+//            DatabaseReference mCategoryRef = mDatabase.getReference(Category.FIREBASE_TAG);
 //            mArrayCategories = new ArrayList<>();
 
-            Query mRef = mCategoryRef.orderByChild("active").equalTo(true);
+//            Query mRef = mCategoryRef.orderByChild("active").equalTo(true);
 
-            mRef.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                    Category c = dataSnapshot.getValue(Category.class);
-//                    mArrayCategories.add(c);
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            mRef.addChildEventListener(new ChildEventListener() {
+//                @Override
+//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+////                    Category c = dataSnapshot.getValue(Category.class);
+////                    mArrayCategories.add(c);
+//                }
+//
+//                @Override
+//                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                }
+//
+//                @Override
+//                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
 
 
             return null;

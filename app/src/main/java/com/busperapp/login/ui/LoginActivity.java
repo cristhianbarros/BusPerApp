@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.login.LoginPresenter;
@@ -82,8 +84,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void handleSignIn(View v) {
-        loginPresenter.validateLogin(inputEmail.getText().toString()
-                , inputPassword.getText().toString());
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+
+        if(!email.isEmpty() && !password.isEmpty()){
+            loginPresenter.validateLogin(inputEmail.getText().toString()
+                    , inputPassword.getText().toString());
+        } else {
+            Util.showSnackbar(v, "Todos los campos son obligatorios");
+        }
     }
 
     @Override

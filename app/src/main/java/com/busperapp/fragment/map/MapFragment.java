@@ -52,6 +52,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -82,11 +87,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return v;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
 
+        if (mGoogleApiClientHelper != null) {
+            mGoogleApiClientHelper.disconnect();
+        }
+
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        final float mZoomLevel = mMap.getCameraPosition().zoom;
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -105,13 +120,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         mMap.setInfoWindowAdapter(new CustomInfoWindow(getActivity()));
-
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
 
                 StringTokenizer tokens = new StringTokenizer(marker.getSnippet(), "|");
-
                 String email = tokens.nextToken();
                 String key = tokens.nextToken();
 
@@ -119,8 +132,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 i.putExtra("key", key);
 
                 startActivity(i);
-
-
             }
         });
 
@@ -135,18 +146,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 ObjectLost objectLost = dataSnapshot.getValue(ObjectLost.class);
                 Map<String, Double> ubicationObject = objectLost.getUbicationLatLang();
 
-                String snippet = objectLost.getUser()+"|"+objectLost.getKey();
+                String snippet = objectLost.getUser() + "|" + objectLost.getKey();
 
                 MarkerOptions mMarkerOption = new MarkerOptions()
                         .position(new LatLng(ubicationObject.get("latitude"), ubicationObject.get("longitude")))
                         .title(objectLost.getTitle())
-                        .snippet(snippet)
-                        ;
-
+                        .snippet(snippet);
 
                 Marker mMarker = mMap.addMarker(mMarkerOption);
-
-
             }
 
             @Override

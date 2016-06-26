@@ -93,6 +93,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="REDEFINING MOBILITY OF MOTOROLA ?"
                     android:textColor="@color/titleblack"
+                    android:textAllCaps="true"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 

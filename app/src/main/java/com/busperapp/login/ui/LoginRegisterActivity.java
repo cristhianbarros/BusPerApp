@@ -1,6 +1,5 @@
 package com.busperapp.login.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,45 +9,42 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.login.LoginPresenter;
 import com.busperapp.login.LoginPresenterImpl;
+import com.busperapp.util.Util;
 
+public class LoginRegisterActivity extends AppCompatActivity implements LoginView {
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
-
-    EditText inputEmail, inputPassword;
-    TextView btnSignIn,btnSignUp;
-    ProgressBar progressBar;
-    LinearLayout container;
-
+    private EditText inputEmail, inputPassword, inputName, inputSurname;
+    private TextView txtSignIn, txtSignUp;
+    private ProgressBar progressBar;
     private LoginPresenter loginPresenter;
+    private LinearLayout container;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_register);
 
         inputEmail = (EditText) findViewById(R.id.editTxtEmail);
         inputPassword = (EditText) findViewById(R.id.editTxtPassword);
+        inputName = (EditText) findViewById(R.id.editTxtName);
+        inputSurname = (EditText) findViewById(R.id.editTxtSurname);
 
-        btnSignIn = (TextView) findViewById(R.id.btnSignin);
-        btnSignUp = (TextView) findViewById(R.id.btnSignup);
+        //txtSignIn = (TextView) findViewById(R.id.btnSignin);
+        txtSignUp = (TextView) findViewById(R.id.btnSignUp);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         container = (LinearLayout) findViewById(R.id.layoutMainContainer);
 
         loginPresenter = new LoginPresenterImpl(this);
         loginPresenter.onCreate();
-        loginPresenter.checkForAuthentication();
 
-    }
+        hideProgressBar();
 
-    @Override
-    protected void onDestroy() {
-        loginPresenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override
@@ -73,25 +69,34 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void handleSignUp(View v) {
-        startActivity(new Intent(this, LoginRegisterActivity.class));
+
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+        String name = inputName.getText().toString();
+        String surName = inputSurname.getText().toString();
+
+        if(!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !surName.isEmpty())
+        {
+            loginPresenter.registerNewUser(email, password, name, surName);
+        } else {
+            Util.showSnackbar(v, "Todos los campos son obligatorios");
+        }
+
     }
 
     @Override
     public void handleSignIn(View v) {
-        loginPresenter.validateLogin(inputEmail.getText().toString()
-                , inputPassword.getText().toString());
+
     }
 
     @Override
     public void navigateToMainScreen() {
-        startActivity(new Intent(this, MainActivity.class));
+
     }
 
     @Override
     public void loginError(String error) {
-        inputPassword.setText("");
-        String msjError = String.format(getString(R.string.login_error_message_signin), error);
-        inputPassword.setError(msjError);
+
     }
 
     @Override
@@ -109,8 +114,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private void setInputs(boolean enabled) {
         inputEmail.setEnabled(enabled);
         inputPassword.setEnabled(enabled);
-        btnSignIn.setEnabled(enabled);
-        btnSignUp.setEnabled(enabled);
+
+        inputName.setEnabled(enabled);
+        inputSurname.setEnabled(enabled);
+
+        //txtSignIn.setEnabled(enabled);
+        txtSignUp.setEnabled(enabled);
     }
 
 }

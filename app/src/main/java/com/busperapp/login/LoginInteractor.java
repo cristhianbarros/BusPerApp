@@ -7,6 +7,7 @@ public interface LoginInteractor {
 
     void checkSession();
     void doSignUp(String email, String password);
+    void doSignUp(String email, String password, String names, String surNames);
     void doSignIn(String email, String password);
     void doSignOut();
 

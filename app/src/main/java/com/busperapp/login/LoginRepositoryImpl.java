@@ -26,11 +26,11 @@ public class LoginRepositoryImpl implements LoginRepository {
         this.helper = FirebaseHelper.getInstance();
         this.mUserReference = helper.getMyUserReference();
         this.mAuth = helper.getmAuthData();
-
     }
 
     @Override
     public void signUp(final String email, final String password) {
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -45,6 +45,24 @@ public class LoginRepositoryImpl implements LoginRepository {
                     }
                 });
     }
+
+    @Override
+    public void signUp(final String email, final String password, final String names, final String surNames) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (!task.isSuccessful()) {
+                            postEvent(LoginEvent.onSignUpError, task.getException().toString());
+                        } else {
+                            postEvent(LoginEvent.onSignUpSuccess);
+                            signIn(email, password, names, surNames);
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void signIn(String email, String password) {
@@ -66,6 +84,24 @@ public class LoginRepositoryImpl implements LoginRepository {
     }
 
     @Override
+    public void signIn(String email, String password, final String names, final String surNames) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (!task.isSuccessful()) {
+                            postEvent(LoginEvent.onSignInError, task.getException().toString());
+                        } else {
+                            initSignIn(names, surNames);
+                        }
+
+
+                    }
+                });
+    }
+
+    @Override
     public void checkSession() {
 
         if (mAuth.getCurrentUser() != null) {
@@ -78,7 +114,6 @@ public class LoginRepositoryImpl implements LoginRepository {
     @Override
     public void signOut() {
         mAuth.signOut();
-        helper.changeUserConnectionStatus(User.OFFLINE);
     }
 
     private void initSignIn() {
@@ -92,7 +127,27 @@ public class LoginRepositoryImpl implements LoginRepository {
                     registerNewUser();
                 }
 
-                helper.changeUserConnectionStatus(User.ONLINE);
+                postEvent(LoginEvent.onSignInSuccess);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void initSignIn(final String names, final String surNames) {
+        mUserReference = helper.getMyUserReference();
+        mUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User currentUser = dataSnapshot.getValue(User.class);
+
+                if (currentUser == null) {
+                    registerNewUser(names, surNames);
+                }
+
                 postEvent(LoginEvent.onSignInSuccess);
             }
 
@@ -112,6 +167,20 @@ public class LoginRepositoryImpl implements LoginRepository {
             mUserReference.setValue(currentUser);
         }
     }
+
+    private void registerNewUser(String names, String surnames) {
+        String email = helper.getAuthUserEmail();
+
+        if(email != null) {
+            User currentUser = new User();
+            currentUser.setEmail(email);
+            currentUser.setNames(names);
+            currentUser.setSurNames(surnames);
+            mUserReference.setValue(currentUser);
+        }
+
+    }
+
 
     private void postEvent(int type, String errorMessage) {
         LoginEvent loginEvent = new LoginEvent();

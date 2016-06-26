@@ -2,9 +2,6 @@ package com.busperapp.login;
 
 import com.busperapp.login.events.LoginEvent;
 
-/**
- * Created by cristhian.barros on 15/06/2016.
- */
 public interface LoginPresenter {
 
     void onCreate();
@@ -12,7 +9,8 @@ public interface LoginPresenter {
 
     void checkForAuthentication();
     void validateLogin(String email, String password);
-    void registerNewUSer(String email, String password);
+    void registerNewUser(String email, String password);
+    void registerNewUser(String email, String password, String names, String surnames);
     void onEventMainThread(LoginEvent event);
 
 }

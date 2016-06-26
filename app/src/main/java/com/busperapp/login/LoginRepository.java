@@ -6,7 +6,9 @@ package com.busperapp.login;
 public interface LoginRepository {
 
     void signUp(String email, String password);
+    void signUp(String email, String password, String names, String surNames);
     void signIn(String email, String password);
+    void signIn(String email, String password, String names, String surnames);
     void checkSession();
     void signOut();
 

@@ -1,15 +1,10 @@
 package com.busperapp.entities;
 
-/**
- * Created by cristhian.barros on 18/06/2016.
- */
 public class User {
 
     private String email;
-    private boolean online;
-
-    public final static boolean ONLINE = true;
-    public final static boolean OFFLINE = false;
+    private String names;
+    private String surNames;
 
     public User() {
 
@@ -23,11 +18,19 @@ public class User {
         this.email = email;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getNames() {
+        return names;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getSurNames() {
+        return surNames;
+    }
+
+    public void setSurNames(String surNames) {
+        this.surNames = surNames;
     }
 }

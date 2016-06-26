@@ -19,7 +19,6 @@ public class LoginPresenterImpl implements LoginPresenter {
         this.eventBus = GreenRobotEventBus.getInstance();
     }
 
-
     @Override
     public void onCreate() {
         eventBus.register(this);
@@ -52,13 +51,18 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void registerNewUSer(String email, String password) {
+    public void registerNewUser(String email, String password) {
+
+    }
+
+    @Override
+    public void registerNewUser(String email, String password, String names, String surNames) {
         if(loginView != null) {
             loginView.disableInputs();
             loginView.showProgressBar();
         }
 
-        loginInteractor.doSignUp(email, password);
+        loginInteractor.doSignUp(email, password, names , surNames);
 
     }
 

@@ -66,7 +66,16 @@
             -->
 
         </activity>
-        <activity android:name=".object.ui.DetailObjectActivity"></activity>
+        <activity android:name=".object.ui.DetailObjectActivity" />
+        <activity
+            android:name=".login.ui.LoginRegisterActivity"
+            android:label="@string/title_activity_login_register"
+            android:parentActivityName=".login.ui.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.busperapp.login.ui.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>

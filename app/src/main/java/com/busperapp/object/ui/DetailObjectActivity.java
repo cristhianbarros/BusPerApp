@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.FirebaseHelper;
@@ -34,7 +35,6 @@ public class DetailObjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_object);
-
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         txtDescription = (TextView) findViewById(R.id.txtDescription);
         txtTitle = (TextView) findViewById(R.id.txtTitle);

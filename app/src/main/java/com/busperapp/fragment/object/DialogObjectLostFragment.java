@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.Util;
@@ -53,7 +54,6 @@ public class DialogObjectLostFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         mBundle = getArguments();
         mLatitude = mBundle.getDouble("latitude");
         mLongitude = mBundle.getDouble("longitude");

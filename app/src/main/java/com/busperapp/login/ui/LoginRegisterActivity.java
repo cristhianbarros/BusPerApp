@@ -1,5 +1,6 @@
 package com.busperapp.login.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.busperapp.util.Util;
 public class LoginRegisterActivity extends AppCompatActivity implements LoginView {
 
     private EditText inputEmail, inputPassword, inputName, inputSurname;
-    private TextView txtSignIn, txtSignUp;
+    private TextView txtSignIn, txtSignUp, txtExist;
     private ProgressBar progressBar;
     private LoginPresenter loginPresenter;
     private LinearLayout container;
@@ -33,7 +34,8 @@ public class LoginRegisterActivity extends AppCompatActivity implements LoginVie
         inputPassword = (EditText) findViewById(R.id.editTxtPassword);
         inputName = (EditText) findViewById(R.id.editTxtName);
         inputSurname = (EditText) findViewById(R.id.editTxtSurname);
-
+        txtExist =(TextView) findViewById(R.id.txtExisst);
+        Util.UnderlineText(txtExist,"Ya tienes una cuenta? Inicia Session");
         //txtSignIn = (TextView) findViewById(R.id.btnSignin);
         txtSignUp = (TextView) findViewById(R.id.btnSignUp);
 
@@ -87,6 +89,10 @@ public class LoginRegisterActivity extends AppCompatActivity implements LoginVie
     @Override
     public void handleSignIn(View v) {
 
+    }
+
+    public void handleExist(View v) {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override

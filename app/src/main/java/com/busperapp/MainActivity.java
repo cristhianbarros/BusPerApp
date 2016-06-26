@@ -18,6 +18,7 @@ import com.busperapp.fragment.map.MapFragment;
 import com.busperapp.login.LoginInteractor;
 import com.busperapp.login.LoginInteractorImpl;
 import com.busperapp.login.ui.LoginActivity;
+import com.busperapp.util.FirebaseHelper;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity
@@ -27,12 +28,13 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager mFramgmentManager;
     private Fragment mFragment;
     private LoginInteractor loginInteractor;
+    public static Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         loginInteractor = new LoginInteractorImpl();

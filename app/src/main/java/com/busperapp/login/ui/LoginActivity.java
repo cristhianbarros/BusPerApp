@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.login.LoginPresenter;
 import com.busperapp.login.LoginPresenterImpl;
+import com.busperapp.util.Util;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -42,6 +43,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginPresenter = new LoginPresenterImpl(this);
         loginPresenter.onCreate();
         loginPresenter.checkForAuthentication();
+
+        Util.UnderlineText(btnSignUp,"No tienes una cuenta ? Registrate");
+
 
     }
 

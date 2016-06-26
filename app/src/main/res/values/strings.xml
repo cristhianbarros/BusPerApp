@@ -23,7 +23,7 @@
     <string name="login.input.email">Correo</string>
     <string name="login.input.password">Contraseña</string>
     <string name="login.button.signin">Inicio de Sesión</string>
-    <string name="login.button.signup">Crear cuenta</string>
+    <string name="login.button.signup">Registrar</string>
 
     <string name="login.input.name">Nombres</string>
     <string name="login.input.surname">Apellidos</string>

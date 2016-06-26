@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.FirebaseHelper;
@@ -38,7 +40,6 @@ public class HistorialFragment extends Fragment {
     public static ArrayList<ObjectLost> listObjects;
     private HistoricalAdapter historicalViewAdapter;
     private Map<String, Double> mUbicationLatLng;
-
     public HistorialFragment() {
         // Required empty public constructor
     }

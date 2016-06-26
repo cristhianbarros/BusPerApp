@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.busperapp.MainActivity;
 import com.busperapp.R;
@@ -20,9 +22,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
 
     EditText inputEmail, inputPassword;
-    Button btnSignIn, btnSignUp;
+    TextView btnSignIn,btnSignUp;
     ProgressBar progressBar;
-    RelativeLayout container;
+    LinearLayout container;
 
     private LoginPresenter loginPresenter;
 
@@ -34,11 +36,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         inputEmail = (EditText) findViewById(R.id.editTxtEmail);
         inputPassword = (EditText) findViewById(R.id.editTxtPassword);
 
-        btnSignIn = (Button) findViewById(R.id.btnSignin);
-        btnSignUp = (Button) findViewById(R.id.btnSignup);
+        btnSignIn = (TextView) findViewById(R.id.btnSignin);
+        btnSignUp = (TextView) findViewById(R.id.btnSignup);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        container = (RelativeLayout) findViewById(R.id.layoutMainContainer);
+        container = (LinearLayout) findViewById(R.id.layoutMainContainer);
 
         loginPresenter = new LoginPresenterImpl(this);
         loginPresenter.onCreate();

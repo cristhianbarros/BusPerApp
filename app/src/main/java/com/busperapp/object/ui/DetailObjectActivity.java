@@ -5,14 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.busperapp.MainActivity;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.FirebaseHelper;
+import com.busperapp.util.Util;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -29,16 +35,25 @@ public class DetailObjectActivity extends AppCompatActivity {
     private ObjectLost mObjectLost;
     private FirebaseHelper mHelper;
     private DatabaseReference mRef;
+    private Button btnDelete, btnEdit;
     private String key;
+    private static Uri mUri;
+    private LinearLayout mContainerButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_detail_object);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         txtDescription = (TextView) findViewById(R.id.txtDescription);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         imgViewObject = (ImageView) findViewById(R.id.imageObject);
+
+        btnEdit = (Button) findViewById(R.id.btnEditObject);
+        btnDelete = (Button) findViewById(R.id.btnDeleteObject);
+
+        mContainerButtons = (LinearLayout) findViewById(R.id.containerButtons);
 
         Intent i = getIntent();
 
@@ -65,12 +80,29 @@ public class DetailObjectActivity extends AppCompatActivity {
                         storageRef.child("images/"+key).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Glide.with(getApplicationContext()).load(uri).into(imgViewObject);
+                                mUri = uri;
+                                Glide.with(getApplicationContext()).load(uri).listener(new RequestListener<Uri, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, Uri model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+
+                                        if(mObjectLost.getUser().equals(mHelper.getAuthUserEmail()) ) {
+                                            mContainerButtons.setVisibility(View.VISIBLE);
+                                        }
+
+                                        return false;
+                                    }
+                                })
+                                        .into(imgViewObject);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
-
+                                Util.showMessage(getApplicationContext(), exception.getMessage());
                             }
                         });
 
@@ -101,7 +133,31 @@ public class DetailObjectActivity extends AppCompatActivity {
 
         }
 
+    }
 
+    public void deleteObject(View v) {
 
     }
+
+
+    public void editObject(View v) {
+
+        if(mObjectLost != null) {
+            Intent i = new Intent(this, AddObject.class);
+            i.putExtra("action", "edit");
+            i.putExtra("mTitle", mObjectLost.getTitle());
+            i.putExtra("mDescription", mObjectLost.getDescription());
+            i.putExtra("mCategory", mObjectLost.getCategory());
+            i.putExtra("mImage", mUri.toString());
+            i.putExtra("mLatitude", mObjectLost.getUbicationLatLang().get("latitude"));
+            i.putExtra("mLongitude", mObjectLost.getUbicationLatLang().get("longitude"));
+            i.putExtra("mKey", mObjectLost.getKey());
+            i.putExtra("mPostalCode", mObjectLost.getPostalCode());
+            i.putExtra("mAddress", mObjectLost.getAddress());
+
+            startActivity(i);
+        }
+
+    }
+
 }

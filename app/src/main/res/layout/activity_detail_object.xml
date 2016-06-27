@@ -34,7 +34,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:scaleType="fitXY"
-                        android:background="@drawable/ice_mountain" />
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/image_loading"
+                        />
                 </FrameLayout>
             </LinearLayout>
 
@@ -111,8 +113,31 @@
                     android:textColor="@color/descriptionblack"
                     android:textSize="12dp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/containerButtons"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/btnEditObject"
+                    android:text="Editar"
+                    android:onClick="editObject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnDeleteObject"
+                    android:text="Eliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

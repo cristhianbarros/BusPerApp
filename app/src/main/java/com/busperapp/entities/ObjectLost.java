@@ -1,5 +1,8 @@
 package com.busperapp.entities;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class ObjectLost {
@@ -103,4 +106,20 @@ public class ObjectLost {
                 ", user='" + user + '\'' +
                 '}';
     }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("title", title);
+        result.put("description", description);
+        result.put("address", address);
+        result.put("category", category);
+        result.put("postalCode", postalCode);
+        result.put("ubicationLatLang", ubicationLatLang);
+        result.put("key", key);
+        result.put("user", user);
+
+        return result;
+    }
+
 }

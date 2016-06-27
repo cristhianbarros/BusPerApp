@@ -60,8 +60,7 @@
 
     <ImageView
         android:id="@+id/imgViewPhoto"
-        android:src="@mipmap/icon"
-        android:scaleType="fitXY"
+        android:src="@drawable/image_upload"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

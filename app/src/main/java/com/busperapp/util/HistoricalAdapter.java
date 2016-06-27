@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,6 +22,7 @@ import com.busperapp.entities.ObjectLost;
 import com.busperapp.object.ui.DetailObjectActivity;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.storage.StorageReference;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -88,30 +88,35 @@ public class HistoricalAdapter extends RecyclerView.Adapter<HistoricalAdapter.Vi
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.overflow);
+                showPopupMenu(holder.overflow, ObjHistorical);
             }
         });
     }
 
-    private void showPopupMenu(View view) {
+    private void showPopupMenu(View view, ObjectLost o) {
+
         // inflate menu
         PopupMenu popup = new PopupMenu(context, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_historical, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(o));
         popup.show();
     }
 
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
-        public MyMenuItemClickListener() {
+        ObjectLost mObjectLost;
+
+        public MyMenuItemClickListener(ObjectLost o) {
+            this.mObjectLost = o;
         }
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
+
             switch (menuItem.getItemId()) {
                 case R.id.edit:
-                    Toast.makeText(context, "Editar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Editar"+mObjectLost.getKey(), Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.delete:
                     Toast.makeText(context, "Borrar", Toast.LENGTH_SHORT).show();
@@ -121,7 +126,6 @@ public class HistoricalAdapter extends RecyclerView.Adapter<HistoricalAdapter.Vi
             return false;
         }
     }
-
 
     @Override
     public int getItemCount() {

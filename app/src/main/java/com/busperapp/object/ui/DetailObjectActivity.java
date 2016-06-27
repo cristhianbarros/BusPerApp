@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -90,7 +91,7 @@ public class DetailObjectActivity extends AppCompatActivity {
                                     @Override
                                     public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
 
-                                        if(mObjectLost.getUser().equals(mHelper.getAuthUserEmail()) ) {
+                                        if (mObjectLost.getUser().equals(mHelper.getAuthUserEmail())) {
                                             mContainerButtons.setVisibility(View.VISIBLE);
                                         }
 
@@ -154,7 +155,7 @@ public class DetailObjectActivity extends AppCompatActivity {
             i.putExtra("mKey", mObjectLost.getKey());
             i.putExtra("mPostalCode", mObjectLost.getPostalCode());
             i.putExtra("mAddress", mObjectLost.getAddress());
-
+            //Toast.makeText(this, mUri.toString(), Toast.LENGTH_SHORT).show();
             startActivity(i);
         }
 

@@ -38,7 +38,7 @@ public class HistorialFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     public static ArrayList<ObjectLost> listObjects;
-    private HistoricalAdapter historicalViewAdapter;
+    public  HistoricalAdapter historicalViewAdapter;
     private Map<String, Double> mUbicationLatLng;
     public HistorialFragment() {
         // Required empty public constructor
@@ -56,7 +56,7 @@ public class HistorialFragment extends Fragment {
         Query QueryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("user").equalTo(FirebaseHelper.getInstance().getAuthUserEmail());
         //.equalTo("cristhianbarros91@hotmail.com")
 
-        QueryRef.addChildEventListener(new ChildEventListener() {
+            QueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ObjectLost mObj = dataSnapshot.getValue(ObjectLost.class);
@@ -74,7 +74,7 @@ public class HistorialFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                historicalViewAdapter.notifyDataSetChanged();
             }
 
             @Override

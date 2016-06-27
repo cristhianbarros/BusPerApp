@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleApiClient.Builder mGoogleApiClient;
-    private FragmentManager mFramgmentManager;
+    public static FragmentManager mFramgmentManager;
     private Fragment mFragment;
     private LoginInteractor loginInteractor;
     public static Toolbar toolbar;

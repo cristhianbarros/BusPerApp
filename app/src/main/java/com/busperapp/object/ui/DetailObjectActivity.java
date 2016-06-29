@@ -1,21 +1,24 @@
 package com.busperapp.object.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.util.FirebaseHelper;
@@ -31,40 +34,44 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailObjectActivity extends AppCompatActivity {
 
-    private TextView txtEmail, txtTitle, txtDescription, txtDate;
+    private TextView txtEmail, txtTitle, txtDescription, txtDate, txtCategory;
     private ImageView imgViewObject;
     private ObjectLost mObjectLost;
     private FirebaseHelper mHelper;
     private DatabaseReference mRef;
-    private Button btnDelete, btnEdit;
-    private String key;
+    private Button btnDelete;
+    private FloatingActionButton fabEditBtn;
+    private static String key;
     private static Uri mUri;
-    private LinearLayout mContainerButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail_object_2);
 
-        setContentView(R.layout.activity_detail_object);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Detalle");
+
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         txtDescription = (TextView) findViewById(R.id.txtDescription);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        txtCategory = (TextView) findViewById(R.id.txtCategory);
         imgViewObject = (ImageView) findViewById(R.id.imageObject);
 
-        btnEdit = (Button) findViewById(R.id.btnEditObject);
-        btnDelete = (Button) findViewById(R.id.btnDeleteObject);
-
-        mContainerButtons = (LinearLayout) findViewById(R.id.containerButtons);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        fabEditBtn = (FloatingActionButton) findViewById(R.id.btnFabEdit);
 
         Intent i = getIntent();
 
-        if(i.hasExtra("key")) {
+        if (i.hasExtra("key")) {
 
             key = i.getExtras().getString("key");
             mHelper = FirebaseHelper.getInstance();
             mRef = mHelper.getmRef();
-            final StorageReference storageRef = mHelper.getmStorage().getReferenceFromUrl("gs://luminous-fire-2940.appspot.com");
 
+            final StorageReference storageRef = mHelper.getmStorage().getReferenceFromUrl("gs://luminous-fire-2940.appspot.com");
             Query result = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByChild("key").equalTo(key);
 
             result.addChildEventListener(new ChildEventListener() {
@@ -77,8 +84,10 @@ public class DetailObjectActivity extends AppCompatActivity {
                         txtEmail.setText(mObjectLost.getUser());
                         txtDescription.setText(mObjectLost.getDescription());
                         txtTitle.setText(mObjectLost.getTitle());
+                        txtDate.setText(mObjectLost.getCreatedAt());
+                        txtCategory.setText(mObjectLost.getCategory());
 
-                        storageRef.child("images/"+key).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        storageRef.child("images/" + key).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
                                 mUri = uri;
@@ -92,7 +101,8 @@ public class DetailObjectActivity extends AppCompatActivity {
                                     public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
 
                                         if (mObjectLost.getUser().equals(mHelper.getAuthUserEmail())) {
-                                            mContainerButtons.setVisibility(View.VISIBLE);
+                                            fabEditBtn.setVisibility(View.VISIBLE);
+                                            btnDelete.setVisibility(View.VISIBLE);
                                         }
 
                                         return false;
@@ -130,20 +140,48 @@ public class DetailObjectActivity extends AppCompatActivity {
 
                 }
             });
-
-
         }
-
     }
 
     public void deleteObject(View v) {
+        final AlertDialog.Builder Alertdialog = new AlertDialog.Builder(DetailObjectActivity.this);
+        Alertdialog.setMessage("Estas seguro que deseas eliminar el objeto ?")
+                .setCancelable(false)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        mRef.child(FirebaseHelper.OBJECT_LOST_PATH).child(mObjectLost.getKey()).removeValue();
+                        StorageReference storageRef = mHelper.getmStorage().getReferenceFromUrl("gs://luminous-fire-2940.appspot.com");
+                        storageRef.child("images/" + mObjectLost.getKey()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Util.showMessage(getApplicationContext(), "El Objeto se ha eliminado de manera exitosa");
+
+                           }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                exception.getMessage();
+                            }
+                        });
+
+                        startActivity(new Intent(DetailObjectActivity.this, MainActivity.class));
+
+
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+
+        }).show();
     }
-
 
     public void editObject(View v) {
 
-        if(mObjectLost != null) {
+        if (mObjectLost != null) {
             Intent i = new Intent(this, AddObject.class);
             i.putExtra("action", "edit");
             i.putExtra("mTitle", mObjectLost.getTitle());
@@ -153,9 +191,12 @@ public class DetailObjectActivity extends AppCompatActivity {
             i.putExtra("mLatitude", mObjectLost.getUbicationLatLang().get("latitude"));
             i.putExtra("mLongitude", mObjectLost.getUbicationLatLang().get("longitude"));
             i.putExtra("mKey", mObjectLost.getKey());
+            i.putExtra("mCreatedAt", mObjectLost.getCreatedAt());
             i.putExtra("mPostalCode", mObjectLost.getPostalCode());
             i.putExtra("mAddress", mObjectLost.getAddress());
-            //Toast.makeText(this, mUri.toString(), Toast.LENGTH_SHORT).show();
+
+            Util.showMessage(getApplicationContext(), mObjectLost.getCreatedAt());
+
             startActivity(i);
         }
 

@@ -33,6 +33,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -211,6 +213,7 @@ public class AddObject extends AppCompatActivity {
             objectLost.setAddress(inputAddress.getText().toString());
             objectLost.setPostalCode(mIntent.getExtras().getString("mPostalCode"));
             objectLost.setCategory(category);
+            objectLost.setCreatedAt(mIntent.getExtras().getString("mCreatedAt"));
             objectLost.setUbicationLatLang(ubicationLatLang);
             objectLost.setUser(user);
 
@@ -224,6 +227,9 @@ public class AddObject extends AppCompatActivity {
         } else {
             uniqueKey = mRef.push().getKey();
 
+            Date dNow = new Date( );
+            SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+
             objectLost = new ObjectLost();
             objectLost.setKey(uniqueKey);
             objectLost.setTitle(title);
@@ -232,6 +238,7 @@ public class AddObject extends AppCompatActivity {
             objectLost.setPostalCode(postalCode);
             objectLost.setCategory(category);
             objectLost.setUbicationLatLang(ubicationLatLang);
+            objectLost.setCreatedAt(ft.format(dNow));
             objectLost.setUser(user);
 
             mRef.child(uniqueKey).setValue(objectLost);

@@ -15,6 +15,7 @@ public class ObjectLost {
     private String postalCode;
     private Map<String, Double> ubicationLatLang;
     private String user;
+    private String createdAt;
 
     public ObjectLost() {
 
@@ -94,6 +95,14 @@ public class ObjectLost {
         this.user = user;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "ObjectLost{" +
@@ -104,6 +113,7 @@ public class ObjectLost {
                 ", postalCode='" + postalCode + '\'' +
                 ", ubicationLatLang=" + ubicationLatLang +
                 ", user='" + user + '\'' +
+                ", createdAt='" + createdAt + '\'' +
                 '}';
     }
 
@@ -116,6 +126,7 @@ public class ObjectLost {
         result.put("category", category);
         result.put("postalCode", postalCode);
         result.put("ubicationLatLang", ubicationLatLang);
+        result.put("createdAt", createdAt);
         result.put("key", key);
         result.put("user", user);
 

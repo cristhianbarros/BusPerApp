@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
@@ -118,6 +118,7 @@
             <LinearLayout
                 android:id="@+id/containerButtons"
                 android:visibility="gone"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -127,14 +128,24 @@
                     android:id="@+id/btnEditObject"
                     android:text="Editar"
                     android:onClick="editObject"
-                    android:layout_width="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/rect_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content" />
 
                 <Button
                     android:id="@+id/btnDeleteObject"
                     android:text="Eliminar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#FFF"
+                    android:background="@drawable/rect_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 

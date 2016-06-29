@@ -40,4 +40,5 @@
         <item>Otro</item>
     </string-array>
     <string name="title_activity_login_register">LoginRegisterActivity</string>
+    <string name="title_activity_splash_screens">SplashScreens</string>
 </resources>

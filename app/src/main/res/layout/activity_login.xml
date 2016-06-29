@@ -83,6 +83,13 @@
             />
 
     </LinearLayout>
+    <!--<Button
+        android:id="@+id/btnDeleteObject"
+        android:text="Eliminar"
+        android:background="@drawable/circle"
+        android:textColor="#FFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />-->
 
 
 </LinearLayout>

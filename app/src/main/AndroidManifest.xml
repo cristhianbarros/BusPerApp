@@ -42,11 +42,6 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".login.ui.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".object.ui.AddObject"
@@ -78,6 +73,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.busperapp.login.ui.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".util.SplashScreen"
+            android:label="@string/title_activity_splash_screens"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

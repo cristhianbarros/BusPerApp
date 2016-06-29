@@ -15,13 +15,13 @@
 
         <LinearLayout
             android:layout_width="125dp"
-            android:layout_height="125dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:id="@+id/imagen"/>
+                android:id="@+id/imagen"/><!--android:scaleType="fitXY"-->
+
         </LinearLayout>
 
         <LinearLayout
@@ -63,10 +63,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ruta"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
+
 
 

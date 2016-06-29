@@ -33,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -228,7 +228,6 @@ public class AddObject extends AppCompatActivity {
             uniqueKey = mRef.push().getKey();
 
             Date dNow = new Date( );
-            SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
 
             objectLost = new ObjectLost();
             objectLost.setKey(uniqueKey);
@@ -238,7 +237,7 @@ public class AddObject extends AppCompatActivity {
             objectLost.setPostalCode(postalCode);
             objectLost.setCategory(category);
             objectLost.setUbicationLatLang(ubicationLatLang);
-            objectLost.setCreatedAt(ft.format(dNow));
+            objectLost.setCreatedAt(DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(dNow));
             objectLost.setUser(user);
 
             mRef.child(uniqueKey).setValue(objectLost);

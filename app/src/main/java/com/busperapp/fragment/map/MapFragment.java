@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
 import com.busperapp.object.ui.AddObject;
@@ -21,6 +20,7 @@ import com.busperapp.util.Util;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -47,6 +47,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     protected Context mContext;
     protected FirebaseDatabase mDatabase;
     protected DatabaseReference mRef;
+    private int icons[] = {
+            R.mipmap.icon_marker_documento,
+            R.mipmap.icon_marker_mascota,
+            R.mipmap.icon_marker_otro,
+            R.mipmap.icon_marker_vehiculo
+    };
+
+
 
     public MapFragment() {
 
@@ -148,10 +156,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                 String snippet = objectLost.getUser() + "|" + objectLost.getKey();
 
+                String lowerCategory = objectLost.getCategory().toLowerCase();
+
+                int i = 0;
+                if(lowerCategory.equals("documento")) {
+                    i = 0;
+                } else if (lowerCategory.equals("vehiculo")) {
+                    i = 3;
+                } else if (lowerCategory.equals("mascota")) {
+                    i = 1;
+                }  else if (lowerCategory.equals("otro")) {
+                    i = 2;
+                }
+
                 MarkerOptions mMarkerOption = new MarkerOptions()
                         .position(new LatLng(ubicationObject.get("latitude"), ubicationObject.get("longitude")))
                         .title(objectLost.getTitle())
-                        .snippet(snippet);
+                        .snippet(snippet)
+                        .icon(BitmapDescriptorFactory.fromResource(icons[i]));
 
                 Marker mMarker = mMap.addMarker(mMarkerOption);
             }

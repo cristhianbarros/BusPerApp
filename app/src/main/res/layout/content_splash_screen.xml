@@ -21,16 +21,18 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:maxWidth="300dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/imageButton"
-            android:background="@drawable/prueba" />
+            android:background="@drawable/logo_busper" />
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#000"
             android:layout_marginTop="10dp"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:progress="100"
+            android:progressDrawable="@drawable/progress_custom"
             android:layout_height="wrap_content"
             android:id="@+id/progress" />
     </LinearLayout>

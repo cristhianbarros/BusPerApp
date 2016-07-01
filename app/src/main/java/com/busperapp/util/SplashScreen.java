@@ -1,8 +1,6 @@
 package com.busperapp.util;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +23,8 @@ public class SplashScreen extends AppCompatActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.progress);
         mProgressBar.setMax(maxProgress());
         Inicializar();
+
+
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

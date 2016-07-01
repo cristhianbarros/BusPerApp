@@ -48,10 +48,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     protected FirebaseDatabase mDatabase;
     protected DatabaseReference mRef;
     private int icons[] = {
-            R.mipmap.icon_marker_documento,
-            R.mipmap.icon_marker_mascota,
-            R.mipmap.icon_marker_otro,
-            R.mipmap.icon_marker_vehiculo
+            R.mipmap.icon_marker_documento40x50,
+            R.mipmap.icon_marker_mascota40x50,
+            R.mipmap.icon_marker_otro40x50,
+            R.mipmap.icon_marker_vehiculo40x50
     };
 
 
@@ -175,7 +175,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         .snippet(snippet)
                         .icon(BitmapDescriptorFactory.fromResource(icons[i]));
 
-                Marker mMarker = mMap.addMarker(mMarkerOption);
+                /*Marker mMarker = */ mMap.addMarker(mMarkerOption);
             }
 
             @Override

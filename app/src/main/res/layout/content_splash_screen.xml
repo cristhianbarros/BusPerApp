@@ -25,7 +25,7 @@
             android:maxWidth="300dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/imageButton"
-            android:background="@drawable/logo_busper" />
+            android:background="@drawable/logo_busper300x100" />
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_gravity="center_horizontal"

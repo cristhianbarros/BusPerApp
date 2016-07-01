@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //setTitle("");
+        //toolbar.setLogo(R.drawable.logo80x40);
 
         loginInteractor = new LoginInteractorImpl();
 

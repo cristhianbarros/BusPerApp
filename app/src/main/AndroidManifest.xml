@@ -41,7 +41,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".login.ui.LoginActivity">
+        <activity android:name=".login.ui.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".object.ui.AddObjectActivity"

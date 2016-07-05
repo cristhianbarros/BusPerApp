@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Util.showMessage(getContext(), exception.getMessage());
+                //Util.showMessage(getContext(), exception.getMessage());
             }
         });
 

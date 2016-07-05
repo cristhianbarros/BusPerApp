@@ -25,7 +25,6 @@ import com.busperapp.login.LoginInteractor;
 import com.busperapp.login.LoginInteractorImpl;
 import com.busperapp.login.ui.LoginActivity;
 import com.busperapp.util.FirebaseHelper;
-import com.busperapp.util.Util;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Util.showMessage(getApplicationContext(), exception.getMessage());
+                //Util.showMessage(getApplicationContext(), exception.getMessage());
             }
         });
 

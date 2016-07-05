@@ -195,8 +195,6 @@ public class DetailObjectActivity extends AppCompatActivity {
             i.putExtra("mPostalCode", mObjectLost.getPostalCode());
             i.putExtra("mAddress", mObjectLost.getAddress());
 
-            Util.showMessage(getApplicationContext(), mObjectLost.getCreatedAt());
-
             startActivity(i);
         }
 

@@ -38,7 +38,7 @@
                 android:layout_height="100dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="70dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_user_profile"
 
                 />
 

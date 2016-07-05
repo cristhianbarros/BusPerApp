@@ -19,7 +19,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="5dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_user_profile"
         />
 
     <TextView

@@ -47,7 +47,7 @@ public class DetailObjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_object_2);
+        setContentView(R.layout.activity_detail_object);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
@@ -182,7 +182,7 @@ public class DetailObjectActivity extends AppCompatActivity {
     public void editObject(View v) {
 
         if (mObjectLost != null) {
-            Intent i = new Intent(this, AddObject.class);
+            Intent i = new Intent(this, AddObjectActivity.class);
             i.putExtra("action", "edit");
             i.putExtra("mTitle", mObjectLost.getTitle());
             i.putExtra("mDescription", mObjectLost.getDescription());

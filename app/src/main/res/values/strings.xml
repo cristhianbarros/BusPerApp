@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BusPerApp</string>
+    <string name="app_name">BusPer</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,7 +31,7 @@
     <string name="login.error.message.signin"> Imposible iniciar sesión %s</string>
     <string name="login.error.message.signup"> Imposible registrar nuevo usuario %s</string>
     <string name="login.notice.message.signup"> Usuario agregado exitosamente.</string>
-    <string name="title_activity_add_object">AddObject</string>
+    <string name="title_activity_add_object">Nueva Pertenencia</string>
 
     <string-array name="categories">
         <item>Documento</item>
@@ -40,5 +40,14 @@
         <item>Otro</item>
     </string-array>
     <string name="title_activity_login_register">LoginRegisterActivity</string>
-    <string name="title_activity_splash_screens">SplashScreens</string>
+    <string name="title_activity_splash_screens">Busper</string>
+
+
+    <!-- Nav Drawer -->
+    <string name="nav.drawer.home">Mapa</string>
+    <string name="nav.drawer.history">Historial</string>
+    <string name="nav.drawer.setting">Configuración</string>
+    <string name="nav.drawer.profile">Perfil</string>
+    <string name="nav.drawer.sign_up">Cerrar Sesión</string>
+
 </resources>

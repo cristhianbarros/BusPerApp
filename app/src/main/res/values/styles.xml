@@ -17,4 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MaterialSwitch">
+        <item name="sw_trackSize">30dp</item>
+        <item name="sw_trackCap">round</item>
+        <item name="sw_thumbRadius">16dp</item>
+        <item name="sw_thumbElevation">2dp</item>
+        <item name="sw_animDuration">@android:integer/config_shortAnimTime</item>
+        <item name="sw_interpolator">@android:anim/decelerate_interpolator</item>
+    </style>
+
 </resources>

@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_busper_luncher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -44,7 +44,7 @@
         <activity android:name=".login.ui.LoginActivity">
         </activity>
         <activity
-            android:name=".object.ui.AddObject"
+            android:name=".object.ui.AddObjectActivity"
             android:label="@string/title_activity_add_object"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

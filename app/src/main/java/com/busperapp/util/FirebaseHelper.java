@@ -17,7 +17,8 @@ public class FirebaseHelper {
 
     private final static String USER_PATH = "users";
     public final static String OBJECT_LOST_PATH = "objectlost";
-    public final static String CATEGORIES_PATH = "categories";
+    public final static String USERS_PATH = "users";
+    public final static String PROFILES_PATH = "profile";
     private final static String FIREBASE_URL = "https://luminous-fire-2940.firebaseio.com/";
 
     private static class SingletonHolder {

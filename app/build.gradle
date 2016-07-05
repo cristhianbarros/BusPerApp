@@ -30,11 +30,18 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'com.google.firebase:firebase-auth:9.0.2'
     compile 'com.google.firebase:firebase-storage:9.0.2'
+    compile 'com.google.android.gms:play-services:9.0.2'
     compile 'com.google.android.gms:play-services-location:9.0.2'
     compile 'com.google.android.gms:play-services-maps:9.0.2'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:cardview-v7:23.0.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile'com.alexzh:circleimageview:1.1.2@aar'
+    compile 'com.github.rey5137:material:1.2.2'
+    compile 'com.mikhaellopez:circularimageview:2.0.1'
+    compile 'com.github.rey5137:material:1.2.2'
+
+    compile 'com.makeramen:roundedimageview:2.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

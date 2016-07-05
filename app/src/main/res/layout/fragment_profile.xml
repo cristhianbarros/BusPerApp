@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.busperapp.fragment.profile.ProfileFragment">
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="0.8"
+            android:scaleType="fitXY"
+            android:src="@drawable/mounteun" />
+
+        <include layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.alexzh.circleimageview.CircleImageView
+                android:id="@+id/imgViewPhoto"
+                app:view_borderColor="#cccccc"
+                app:view_borderWidth="2dp"
+                app:view_shadowDx="2dp"
+                app:view_shadowDy="0dp"
+                app:view_shadowRadius="2dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="70dp"
+                android:src="@mipmap/ic_launcher"
+
+                />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <customfont.MyTextView
+            android:id="@+id/txtFullNames"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Nombres Apellidos"
+            android:background="#00000000"
+            android:inputType="text"
+            android:padding="16dp" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <customfont.MyTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.3"
+            android:padding="15dp"
+            android:text="@string/login.input.email"
+            android:textSize="12dp" />
+
+        <customfont.MyTextView
+            android:id="@+id/txtEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:inputType="textEmailAddress"
+            android:padding="16dp" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <customfont.MyTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.3"
+            android:padding="15dp"
+            android:text="Celular"
+            android:textSize="12dp" />
+
+        <customfont.MyEditText
+            android:id="@+id/inputCellPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:inputType="number"
+            android:padding="16dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <customfont.MyTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:text="Perfil público"
+            android:textSize="14dp" />
+
+        <com.rey.material.widget.Switch
+            android:id="@+id/switchPublicProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="13dp"
+            android:checked="true"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:switchPadding="16dp"
+            style="@style/MaterialSwitch"
+            />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSaveProfile"
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_setting_dark" />
+
+</LinearLayout>

@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class AddObject extends AppCompatActivity {
+public class AddObjectActivity extends AppCompatActivity {
 
     private static String APP_DIRECTORY = "MyPictureApp/";
 

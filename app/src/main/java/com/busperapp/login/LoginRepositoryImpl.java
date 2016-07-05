@@ -2,6 +2,7 @@ package com.busperapp.login;
 
 import android.support.annotation.NonNull;
 
+import com.busperapp.entities.Profile;
 import com.busperapp.entities.User;
 import com.busperapp.login.events.LoginEvent;
 import com.busperapp.util.EventBus;
@@ -146,6 +147,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 
                 if (currentUser == null) {
                     registerNewUser(names, surNames);
+                    registerProfileUser(names, surNames);
                 }
 
                 postEvent(LoginEvent.onSignInSuccess);
@@ -193,10 +195,30 @@ public class LoginRepositoryImpl implements LoginRepository {
         EventBus eventBus = GreenRobotEventBus.getInstance();
         eventBus.post(loginEvent);
 
-
     }
 
     private void postEvent(int type) {
         postEvent(type, null);
     }
+
+    private void registerProfileUser(String names, String surnames) {
+        String email = helper.getAuthUserEmail();
+
+        if(email != null) {
+            Profile userProfile = new Profile();
+            userProfile.setNames(names);
+            userProfile.setSurnames(surnames);
+            userProfile.setEmail(email);
+            userProfile.setCellPhone("0");
+            userProfile.setPublic(true);
+
+            FirebaseHelper myHelper = new FirebaseHelper();
+            DatabaseReference myRef = myHelper.getmRef().child(FirebaseHelper.PROFILES_PATH).child(email.replace(".","_"));
+            myRef.setValue(userProfile);
+
+        }
+
+    }
+
+
 }

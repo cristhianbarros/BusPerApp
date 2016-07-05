@@ -1,6 +1,5 @@
 package com.busperapp.fragment.map;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
-import com.busperapp.object.ui.AddObject;
+import com.busperapp.object.ui.AddObjectActivity;
 import com.busperapp.object.ui.DetailObjectActivity;
 import com.busperapp.util.CustomInfoWindow;
 import com.busperapp.util.FirebaseHelper;
@@ -34,10 +33,6 @@ import com.google.firebase.database.Query;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -52,9 +47,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             R.mipmap.icon_marker_mascota40x50,
             R.mipmap.icon_marker_otro40x50,
             R.mipmap.icon_marker_vehiculo40x50
+
     };
-
-
 
     public MapFragment() {
 
@@ -68,6 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         mContext = getContext();
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
@@ -76,9 +71,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
-
-        // In this part is important to handle the exceptions
-        // For this reason I include a try catch to handle the Security Exception
 
         try {
             mMap = mapFragment.getMap();
@@ -109,8 +101,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        final float mZoomLevel = mMap.getCameraPosition().zoom;
-
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -118,14 +108,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 mLatitude = latLng.latitude;
                 mLongitude = latLng.longitude;
 
-                Intent mIntent = new Intent(getContext(), AddObject.class);
+                Intent mIntent = new Intent(getContext(), AddObjectActivity.class);
                 mIntent.putExtra("latitude", mLatitude);
                 mIntent.putExtra("longitude", mLongitude);
                 startActivity(mIntent);
 
             }
         });
-
 
         mMap.setInfoWindowAdapter(new CustomInfoWindow(getActivity()));
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -143,10 +132,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-//
-//        Query queryRef = mRef.child("object_lost").orderByChild("ubicationLatLang/latitud").startAt(6.233).endAt(6.235);
         Query queryRef = mRef.child(FirebaseHelper.OBJECT_LOST_PATH).orderByKey();
-
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -159,6 +145,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 String lowerCategory = objectLost.getCategory().toLowerCase();
 
                 int i = 0;
+
                 if(lowerCategory.equals("documento")) {
                     i = 0;
                 } else if (lowerCategory.equals("vehiculo")) {
@@ -175,7 +162,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         .snippet(snippet)
                         .icon(BitmapDescriptorFactory.fromResource(icons[i]));
 
-                /*Marker mMarker = */ mMap.addMarker(mMarkerOption);
+                mMap.addMarker(mMarkerOption);
             }
 
             @Override

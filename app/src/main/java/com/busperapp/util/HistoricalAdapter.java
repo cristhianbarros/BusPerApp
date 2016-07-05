@@ -1,27 +1,22 @@
 package com.busperapp.util;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.ActionProvider;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;
@@ -32,8 +27,7 @@ import com.bumptech.glide.request.target.Target;
 import com.busperapp.MainActivity;
 import com.busperapp.R;
 import com.busperapp.entities.ObjectLost;
-import com.busperapp.fragment.historial.HistorialFragment;
-import com.busperapp.object.ui.AddObject;
+import com.busperapp.object.ui.AddObjectActivity;
 import com.busperapp.object.ui.DetailObjectActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +35,7 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -170,7 +165,7 @@ public class HistoricalAdapter extends RecyclerView.Adapter<HistoricalAdapter.Vi
         }
 
         public Intent initIntent(Context c,ObjectLost o,String ruta){
-            Intent i = new Intent(c, AddObject.class);
+            Intent i = new Intent(c, AddObjectActivity.class);
             i.putExtra("action", "edit");
             i.putExtra("mTitle", o.getTitle());
             i.putExtra("mDescription", o.getDescription());

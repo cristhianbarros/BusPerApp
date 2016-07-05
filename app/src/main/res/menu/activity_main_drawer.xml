@@ -3,33 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Home" />
+            android:id="@+id/nav_map"
+            android:icon="@mipmap/ic_map_black_24dp"
+            android:title="@string/nav.drawer.home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Mi Historia" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="---" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="---" />
-    </group>
+            android:id="@+id/nav_history"
+            android:icon="@mipmap/ic_list_black_24dp"
+            android:title="@string/nav.drawer.history" />
+</group>
 
-    <item android:title="Configuración">
+    <item android:title="@string/nav.drawer.setting">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Preferencias" />
+                android:id="@+id/nav_profile"
+                android:icon="@mipmap/ic_settings_black_24dp"
+                android:title="@string/nav.drawer.profile" />
             <item
                 android:id="@+id/nav_sign_out"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Cerrar Sesión" />
+                android:icon="@mipmap/ic_power_settings_new_black_24dp"
+                android:title="@string/nav.drawer.sign_up" />
         </menu>
     </item>
 

@@ -18,19 +18,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="200dp"
-            android:maxWidth="300dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/imageButton"
-            android:background="@drawable/logo_busper300x100" />
+            android:background="@drawable/logo_splash_screen" />
+
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_width="300dp"
+            android:padding="15dp"
             android:progress="100"
             android:progressDrawable="@drawable/progress_custom"
             android:layout_height="wrap_content"

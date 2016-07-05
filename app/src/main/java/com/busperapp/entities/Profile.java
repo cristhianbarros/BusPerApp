@@ -1,159 +1,84 @@
 package com.busperapp.entities;
 
-import java.util.UUID;
+import com.google.firebase.database.Exclude;
 
-/**
- * Created by cristhian.barros on 04/05/2016.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class Profile {
 
-    private String _id;
-    private String nombres;
-    private String apellidos;
-    private String correo;
-    private String direccionCasa;
-    private Double latitudCasa;
-    private Double longitudCasa;
-    private String direccionTrabajo;
-    private Double latitudTrabajo;
-    private Double longitudTrabajo;
-    private String celular;
-    private String avatar;
-    private String cotrasena;
-    private String fechaCreacion;
-    private String fechaActualizacion;
-    private boolean estado;
+    private String cellPhone;
+    private Boolean isPublic;
+    private String email;
+    private String names;
+    private String surnames;
 
-    public Profile(String nombres, String apellidos, String correo) {
 
-        this._id = UUID.randomUUID().toString();
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.correo = correo;
+    public Profile() {
 
     }
 
-    public String get_id() {
-        return _id;
+
+    public String getCellPhone() {
+        return cellPhone;
     }
 
-    public String getNombres() {
-        return nombres;
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public Boolean getPublic() {
+        return isPublic;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public String getEmail() {
+        return email;
     }
 
-    public String getCorreo() {
-        return correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public String getNames() {
+        return names;
     }
 
-    public String getDireccionCasa() {
-        return direccionCasa;
+    public void setNames(String names) {
+        this.names = names;
     }
 
-    public void setDireccionCasa(String direccionCasa) {
-        this.direccionCasa = direccionCasa;
+    public String getSurnames() {
+        return surnames;
     }
 
-    public Double getLatitudCasa() {
-        return latitudCasa;
+    public void setSurnames(String surnames) {
+        this.surnames = surnames;
     }
 
-    public void setLatitudCasa(Double latitudCasa) {
-        this.latitudCasa = latitudCasa;
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "cellPhone='" + cellPhone + '\'' +
+                ", isPublic=" + isPublic +
+                ", email='" + email + '\'' +
+                ", names='" + names + '\'' +
+                ", surnames='" + surnames + '\'' +
+                '}';
     }
 
-    public Double getLongitudCasa() {
-        return longitudCasa;
-    }
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("cellPhone", cellPhone);
+        result.put("public", isPublic);
+        result.put("email", email);
+        result.put("names", names);
+        result.put("surnames", surnames);
 
-    public void setLongitudCasa(Double longitudCasa) {
-        this.longitudCasa = longitudCasa;
-    }
-
-    public String getDireccionTrabajo() {
-        return direccionTrabajo;
-    }
-
-    public void setDireccionTrabajo(String direccionTrabajo) {
-        this.direccionTrabajo = direccionTrabajo;
-    }
-
-    public Double getLatitudTrabajo() {
-        return latitudTrabajo;
-    }
-
-    public void setLatitudTrabajo(Double latitudTrabajo) {
-        this.latitudTrabajo = latitudTrabajo;
-    }
-
-    public Double getLongitudTrabajo() {
-        return longitudTrabajo;
-    }
-
-    public void setLongitudTrabajo(Double longitudTrabajo) {
-        this.longitudTrabajo = longitudTrabajo;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getCotrasena() {
-        return cotrasena;
-    }
-
-    public void setCotrasena(String cotrasena) {
-        this.cotrasena = cotrasena;
-    }
-
-    public String getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public String getFechaActualizacion() {
-        return fechaActualizacion;
-    }
-
-    public void setFechaActualizacion(String fechaActualizacion) {
-        this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+        return result;
     }
 }
